@@ -25,3 +25,8 @@ class Contact(models.Model):
 class Phone(models.Model):
     contact = models.ForeignKey(to=Contact, on_delete=models.CASCADE)
     phone = models.CharField(max_length=10)
+
+
+class Email(models.Model):
+    contact = models.ForeignKey(to=Contact, on_delete=models.CASCADE)
+    email = models.EmailField(max_length=30)
