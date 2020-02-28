@@ -11,14 +11,13 @@ class ContactManager(models.Manager):
         contact = self.model(name=name, user=user, **extra_fields)
         contact.save(using=self._db)
 
-        phone = extra_fields['phone']
-        email = extra_fields['email']
-
-        if phone:
+        if extra_fields.__contains__('phone'):
+            phone = extra_fields['phone']
             for entry in phone:
                 Phone.objects.create(contact=contact, phone=entry)
 
-        if email:
+        if extra_fields.__contains__('email'):
+            email = extra_fields['email']
             for entry in email:
                 Email.objects.create(contact=contact, email=entry)
 
