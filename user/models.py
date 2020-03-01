@@ -47,9 +47,11 @@ class User(AbstractUser):
 class Phone(models.Model):
     user = models.ForeignKey(to=User, on_delete=models.CASCADE)
     phone = models.IntegerField(unique=True)
+    confirmed = models.BooleanField(default=False, verbose_name='confirmed')
 
 
 class Email(models.Model):
     user = models.ForeignKey(
         to=User, on_delete=models.CASCADE, related_name="Emails")
     email = models.EmailField(unique=True, max_length=30)
+    confirmed = models.BooleanField(default=False, verbose_name='confirmed')
