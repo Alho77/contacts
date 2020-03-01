@@ -54,6 +54,29 @@ class PrivateUserTest(APITestCase):
         self.factory = APIRequestFactory()
         self.client.force_authenticate(self.user)
 
+    # TODO: test phone and email confiramtion
+    # def test_confirm_email(self):
+    #     """Test email confiramtion"""
+
+    def test_user_password_change(self):
+        """Test changing password"""
+        payload = {'password': '12345', 're-password': '12345'}
+        change_pass_url = reverse('user:change-password')
+
+        res = self.client.post(change_pass_url, payload)
+
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
+        self.assertTrue(self.user.check_password(payload['password']))
+        self.assertNotIn('password', res.data)
+
+    def test_user_password_reset(self):
+        """Test reset password"""
+        payload = {'email': ['test@test.com', ]}
+        reset_pass_url = reverse('user:reset-password')
+        res = self.client.post(reset_pass_url, payload)
+
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
+
     def test_user_logout(self):
         """Test logout user"""
         logout_view = views.LogoutView.as_view()
