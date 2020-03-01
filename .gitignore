@@ -1,0 +1,9 @@
+db.sqlite3
+contact/__pycache__/*
+contact/tests/__pycache__/*
+contacts/__pycache__/*
+user/__pycache__/*
+user/api/__pycache__/*
+user/migrations/__pycache__/*
+user/tests/__pycache__/*
+contact/migrations/__pycache__/*
